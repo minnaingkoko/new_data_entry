@@ -1,0 +1,58 @@
+<!-- <form method="POST" id='smartCardForm' action="/smartcard-form"> -->
+<form method="POST" id='smartCardForm'>
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" /><br />
+  <label for="fatherName">FatherName:</label>
+  <input type="text" id="fatherName" name="fatherName" /><br />
+  <label for="birthday">Birthday:</label>
+  <input type="date" id="birthday" name="birthday" /><br />
+  <label for="birthPlace">BirthPlace:</label>
+  <input type="text" id="birthPlace" name="birthPlace" /><br />
+  <label for="relegion">Relegion:</label>
+  <input type="text" id="relegion" name="relegion" /><br />
+  <!-- <label for="gender">Gender:</label>
+  <input type="radio" id="male" name="gender" value="male" />
+  <label for="male">male</label>
+  <input type="radio" id="female" name="gender" value="female" />
+  <label for="female">female</label><br /> -->
+  <label for="passportNo">PassportNo:</label>
+  <input type="text" id="passportNo" name="passportNo" /><br />
+  <!-- <label for="workingCountry">WorkingCountry:</label>
+  <input type="text" id="workingCountry" name="workingCountry" /><br /> -->
+  <label for="wCompanyName">CompanyName:</label>
+  <input type="text" id="wCompanyName" name="wCompanyName" /><br />
+  <label for="wCompanyAddress">CompanyAddress:</label>
+  <input type="text" id="wCompanyAddress" name="wCompanyAddress" /><br />
+  <label for="fAgencyName">ForeignAgencyName:</label>
+  <input type="text" id="fAgencyName" name="fAgencyName" /><br />
+  <!-- <label for="lAgencyName:">LocalAgencyName:</label>
+  <input type="text" id="lAgencyName:" name="lAgencyName:" /><br /> -->
+  <label for="phNo">phone-number:</label>
+  <input type="text" id="phNo" name="phNo" /><br />
+  <br />
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const form = document.getElementById("smartCardForm");
+    form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    await fetch("/smartcard-form", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Form submitted successfully", data);
+    })
+    .catch((error) => {
+      console.error("Error submitting form", error);
+    });
+  });
+</script>
